@@ -23,9 +23,6 @@ const Navbar = () => {
     <div className={`${classes.item} ${classes.active}`}>
       <a>Messages</a>
     </div>
-    <div className={`${classes.item} ${classes.active}`}>
-      <a>Chat</a>
-    </div>
     <div className={classes.item}>
       <a>News</a>
     </div>
