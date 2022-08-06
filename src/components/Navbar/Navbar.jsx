@@ -1,27 +1,16 @@
 import React from 'react';
 import classes from './Navbar.module.css';
+import {NavLink} from "react-router-dom";
 console.log(classes);
 
-// let classes = {
-//  'nav': .Navbar_nav__kzJbI,
-// 'item': .Navbar_item__J0rHl,
-// 'active': 'какое то значение'
-//}
-
-// let c1 = "item";
-// let c2 = "active";
-// let classes = "item active";
-// // "item active"
-// let classes = c1 + " " + c2;
-// Let classesNew = `${classes.item} ${classes.active}`;
-
 const Navbar = () => {
-    return  <nav className={classes.nav}>
+    return (
+    <nav className={classes.nav}>
     <div className={classes.item}>
-      <a>Profile</a>
+      <NavLink to='/profile' activeClassName={classes.activelink}>Profile</NavLink>
     </div>
-    <div className={`${classes.item} ${classes.active}`}>
-      <a>Messages</a>
+    <div className={`${classes.item} ${classes.activelink}`}>
+      <NavLink to='/dialogs' activeClassName={classes.activelink}>Messages</NavLink>
     </div>
     <div className={classes.item}>
       <a>News</a>
@@ -32,7 +21,8 @@ const Navbar = () => {
     <div className={classes.item}>
       <a>Settings</a>
     </div>
-  </nav>;
+  </nav>
+)
 }
 
 export default Navbar;
