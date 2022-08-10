@@ -6,9 +6,8 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Profile from './components/Profile/Profile';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-let SomeComponent = () => <Dialogs />
+const App = (props) => {
 
-const App = () => {
   return (
     <Router>
       <div className='app-wrapper'>
@@ -19,8 +18,8 @@ const App = () => {
             {/* <Route path='/dialogs' component={Dialogs} />
             <Route path='/profile' component={Profile} /> */}
 
-            <Route path='/dialogs' render={ SomeComponent } />
-            <Route path='/profile' render={ () => <Profile />} />
+            <Route path='/dialogs' render={ () => <Dialogs dialogs={props.dialogs} message={props.message} />} />
+            <Route path='/profile' render={ () => <Profile posts={props.posts} />} />
           </Switch>
         </div>
       </div>
