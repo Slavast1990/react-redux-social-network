@@ -25,7 +25,9 @@
         { id: 5, message: 'Yo' },
         { id: 6, message: 'Yo' },
       ]
-   }
+   },
+
+   sidebar: {}
      
   }
 
