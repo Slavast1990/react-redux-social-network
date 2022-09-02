@@ -6,9 +6,9 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Profile from './components/Profile/Profile';
 import { Switch, Route} from "react-router-dom";
 import store from './redux/redux-store';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App = (props) => {
-debugger;
   return (
       <div className='app-wrapper'>
         <Header />
@@ -18,9 +18,8 @@ debugger;
             {/* <Route path='/dialogs' component={Dialogs} />
             <Route path='/profile' component={Profile} /> */}
 
-            <Route path='/dialogs' render={ () => <Dialogs store={props.store} state={props.state.dialogsPage} />} />
-            <Route path='/profile' render={ () => <Profile profilePage={props.state.profilePage}
-             dispatch={props.dispatch} />} />
+            <Route path='/dialogs' render={ () => <DialogsContainer store={props.store} />} />
+            <Route path='/profile' render={ () => <Profile store = {props.store} />} />
           </Switch>
         </div>
       </div>
