@@ -7,7 +7,6 @@ let initialState = {
 };
 
 const usersReducer = (state = initialState, action) => {
-  console.log(state.users)
   switch (action.type) {
     case FOLLOW:
       return {
