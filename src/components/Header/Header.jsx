@@ -1,8 +1,10 @@
 import React from 'react';
 import classes from './Header.module.css';
+import Bird from './../../assets/images/Bird.png'
+
 const Header = () => {
   return <header className={classes.header}>
-    <img src='https://play-lh.googleusercontent.com/DTzWtkxfnKwFO3ruybY1SKjJQnLYeuK3KmQmwV5OQ3dULr5iXxeEtzBLceultrKTIUTr' />
+    <img src={Bird} />
   </header>;
 }
 
