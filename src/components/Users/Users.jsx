@@ -33,9 +33,9 @@ let Users = (props) => {
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => {
-                                props.unfollow(u.id)
-
+                            ? <button disabled={props.followingInProgress.some (id => id === u.id)} onClick={() => {
+                                props.unfollow(u.id);
+                                props.toggleIsFollowingInProgress(true, u.id);
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     withCredentials: true,
                                     headers: {
@@ -46,14 +46,15 @@ let Users = (props) => {
                                         if (response.data.resultCode == 0) {
                                             props.unfollow(u.id);
                                         }
+                                        props.toggleIsFollowingInProgress(false, u.id);
                                     });
 
 
 
                             }}>Unfollow</button>
-                            : <button onClick={() => {
-                                props.follow(u.id)
-
+                            : <button disabled={props.followingInProgress.some (id => id === u.id)} onClick={() => {
+                                props.follow(u.id);
+                                props.toggleIsFollowingInProgress(true, u.id);
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                     withCredentials: true,
                                     headers: {
@@ -63,6 +64,8 @@ let Users = (props) => {
                                     .then(response => {
                                         if (response.data.resultCode == 0) {
                                             props.follow(u.id);
+                                            props.toggleIsFollowingInProgress(false, u.id);
+
                                         }
                                     });
                             }}>Follow</button>}
