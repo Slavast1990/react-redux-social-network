@@ -1,7 +1,6 @@
 import { authAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
-const UNFOLLOW = 'UNFOLLOW';
 
 let initialState = {
   id: null,
@@ -16,8 +15,7 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_DATA:
       return {
         ...state,
-        ...action.data,
-        isAuth: true
+        ...action.payload,
       }
 
 
@@ -28,15 +26,36 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const setAuthUserData = (id, email, login) => ({ type: SET_USER_DATA, data: {id, email, login} })
-export const getAuthUserData = () => (dispatch) => {
+export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, payload: {id, email, login, isAuth} })
+export const getAuthUserData = () => (dispatch) => {//установить авторизованые даные
   authAPI.me()
   .then(Response => {
     if (Response.data.resultCode === 0) {
       let {id, login, email} = Response.data.data;
-      dispatch (setAuthUserData( id, email, login ));
+      dispatch (setAuthUserData( id, email, login, true ));
     }
 });
 }
 
+export const login = (email, password, rememberMe) => (dispatch) => {
+  console.log(email, password, rememberMe)
+  authAPI.login(email, password, rememberMe)
+  .then(Response => {
+    if (Response.data.resultCode === 0) {
+      dispatch (getAuthUserData())
+    }
+});
+}
+//Login это санка задача которой логинится. Санка это логика в квадратных скобках которая принимает метод dispatch
+//Когда мы залогинились мы dispatch getAuthUserData наши данные
+
+export const logout = () => (dispatch) => {
+  console.log()
+  authAPI.logout()
+  .then(Response => {
+    if (Response.data.resultCode === 0) {
+      dispatch (setAuthUserData(null, null, null, false))//если мы вылогинились мы занулились
+    }
+});
+}
 export default authReducer;

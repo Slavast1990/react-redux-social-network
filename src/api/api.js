@@ -46,7 +46,13 @@ const instance = axios.create({
 
     export const authAPI = {
       me () {
-        return instance.get(`auth/me`,) 
+        return instance.get(`auth/me`);
+    },
+    login (email, password, rememberMe = false) { // rememberMe по умолчанию false если не придет то будет false
+        return instance.post(`auth/login`, { email, password, rememberMe }); 
+    },//ето запрос на логинизацию 
+    logout () { 
+        return instance.delete(`auth/login`); 
     }
     }
 
