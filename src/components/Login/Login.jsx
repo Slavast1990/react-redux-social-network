@@ -5,6 +5,8 @@ import { required } from "../../utils/validators/validators";
 import { Input } from "../common/FormsControls/FormsControls";
 import { login } from "../../redux/auth-reducer";
 import { Redirect } from "react-router-dom";
+import styles from "./../common/FormsControls/FormsControls.module.css";
+
 
 const LoginForm = (props) => {
     console.log('RERENDER')
@@ -21,8 +23,11 @@ const LoginForm = (props) => {
                     component={Input} />
             </div>
             <div>
-                <Field component={Input} name={"rememberMe"} type={"checkbox"} /> remember me
+                <Field component={Input} name={"rememberMe"} type={"checkbox"} /> remember me 
             </div>
+            { props.error && <div className={styles.formSummaryError} /* если в props приходит error то мы показываем styles error */> 
+            {props.error} 
+            </div> }
             <div>
                 <button>login</button>
             </div>
@@ -51,4 +56,4 @@ const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 })
 
-export default connect(mapStateToProps, {login} ) (Login);//login это санка из auth-reducer
+export default connect(mapStateToProps, { login })(Login);//login это санка из auth-reducer
