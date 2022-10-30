@@ -56,4 +56,4 @@ const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 })
 
-export default connect(mapStateToProps, { login })(Login);//login это санка из auth-reducer
+export default connect(mapStateToProps, { login })(Login);//{login} это санка из auth-reducer

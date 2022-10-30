@@ -29,13 +29,14 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, payload: {id, email, login, isAuth} })
 export const getAuthUserData = () => (dispatch) => {//установить авторизованые даные
-  authAPI.me()
-  .then(Response => {
+  return authAPI.me()
+  .then(Response => {// return помогает дождаться результата промиса then (асинхронный запрос)
     if (Response.data.resultCode === 0) {
       let {id, login, email} = Response.data.data;
       dispatch (setAuthUserData( id, email, login, true ));//если мы авторизованы мы шлем ети данные
     }
 });
+
 }
 
 export const login = (email, password, rememberMe) => (dispatch) => {
