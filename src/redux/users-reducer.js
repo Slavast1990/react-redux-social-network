@@ -15,11 +15,13 @@ let initialState = {
   totalUsersCount: 2,
   currentPage: 5,
   isFetching: true,
-  followingInProgress: []
+  followingInProgress: [],
+  fake: 10
 };
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "FAKE": return {...state, fake: state.fake + 1}//при каждом изменении при dispatch "FAKE" мы возвращаем копию state
     case FOLLOW:
       return {
         ...state,
@@ -72,10 +74,11 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggleIsFollowingInProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 
-export const getUsers = (currentPage, PageSize) => {
+export const requestUsers = (Page, PageSize) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
-    usersAPI.getUsers(currentPage, PageSize)
+    dispatch(setCurrentPage(Page));//подсвечивается нужная страница
+    usersAPI.requestUsers(Page, PageSize)
     .then(data => {
       dispatch(toggleIsFetching(false));
       dispatch(setUsers(data.items));
