@@ -7,6 +7,10 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
+// let h1 = document.createElement ("h1");//нативный js елемент
+// h1.innerHTML = "Hello";//нативный DOM елемент (обьект DOM настоящего)
+// document.querySelector("body").appendChild(h1);
+
 setInterval(() => {
   store.dispatch({type: "FAKE"})
 }, 1000 );//метод setInterval каждую секунду dispatch в store какой то type(action) FAKE (благодаря етому mapStateToProps в ProfileContainer меняется каждую сек)
