@@ -22,6 +22,7 @@ class App extends React.Component {
     return <Preloader />
     }
   return (
+    
       <div className='app-wrapper'>
         <HeaderContainer />
         <Navbar />
