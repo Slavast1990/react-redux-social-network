@@ -2,31 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { required } from "../../utils/validators/validators";
-import { Input } from "../common/FormsControls/FormsControls";
+import { createField, Input } from "../common/FormsControls/FormsControls";
 import { login } from "../../redux/auth-reducer";
 import { Redirect } from "react-router-dom";
 import styles from "./../common/FormsControls/FormsControls.module.css";
 
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => { //деструктуризация чтоб не писать props.handleSubmit...
     console.log('RERENDER')
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Email'} name={"email"}
-                    validate={[required]}
-                    component={Input} />
-            </div>
-            <div>
-                <Field placeholder={'Password'} name={"password"} type={"password"}
-                    validate={[required]}
-                    component={Input} />
-            </div>
-            <div>
-                <Field component={Input} name={"rememberMe"} type={"checkbox"} /> remember me 
-            </div>
-            { props.error && <div className={styles.formSummaryError} /* если в props приходит error то мы показываем styles error */> 
-            {props.error} 
+        <form onSubmit={handleSubmit}>
+                {createField('Email', "email", [required], Input) /* тоже самое placeholder, name, validate, component*/}
+                {createField('Password', "password", [required], Input, {type: "password"}) /* {type: "password"} дополнительный параметр - {...props} в createField*/}
+                {createField( null, "rememberMe", [], Input, {type: "checkbox"}, "remember me") /* "remember me" это текст*/}
+           
+           
+            { error && <div className={styles.formSummaryError} /* если в props приходит error то мы показываем styles error */> 
+            {error} 
             </div> }
             <div>
                 <button>login</button>
