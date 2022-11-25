@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/react-redux-social-network/static/css/main.b0fc5d0a.css",
+    "main.js": "/react-redux-social-network/static/js/main.a1503ae3.js",
+    "static/css/49.bd06d66a.chunk.css": "/react-redux-social-network/static/css/49.bd06d66a.chunk.css",
+    "static/js/49.759c6c55.chunk.js": "/react-redux-social-network/static/js/49.759c6c55.chunk.js",
+    "static/css/16.01f29466.chunk.css": "/react-redux-social-network/static/css/16.01f29466.chunk.css",
+    "static/js/16.142538a5.chunk.js": "/react-redux-social-network/static/js/16.142538a5.chunk.js",
+    "static/js/787.28cb0dcd.chunk.js": "/react-redux-social-network/static/js/787.28cb0dcd.chunk.js",
+    "static/js/803.dd5ee17e.chunk.js": "/react-redux-social-network/static/js/803.dd5ee17e.chunk.js",
+    "static/media/user.png": "/react-redux-social-network/static/media/user.be2959bfcfaeee682f4f.png",
+    "static/media/preloader.svg": "/react-redux-social-network/static/media/preloader.ea356991b1c2fb4775312a4c61f7a20d.svg",
+    "index.html": "/react-redux-social-network/index.html",
+    "main.b0fc5d0a.css.map": "/react-redux-social-network/static/css/main.b0fc5d0a.css.map",
+    "main.a1503ae3.js.map": "/react-redux-social-network/static/js/main.a1503ae3.js.map",
+    "49.bd06d66a.chunk.css.map": "/react-redux-social-network/static/css/49.bd06d66a.chunk.css.map",
+    "49.759c6c55.chunk.js.map": "/react-redux-social-network/static/js/49.759c6c55.chunk.js.map",
+    "16.01f29466.chunk.css.map": "/react-redux-social-network/static/css/16.01f29466.chunk.css.map",
+    "16.142538a5.chunk.js.map": "/react-redux-social-network/static/js/16.142538a5.chunk.js.map",
+    "787.28cb0dcd.chunk.js.map": "/react-redux-social-network/static/js/787.28cb0dcd.chunk.js.map",
+    "803.dd5ee17e.chunk.js.map": "/react-redux-social-network/static/js/803.dd5ee17e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0fc5d0a.css",
+    "static/js/main.a1503ae3.js"
+  ]
+}
