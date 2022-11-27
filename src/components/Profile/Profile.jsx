@@ -7,7 +7,12 @@ import ProfileInfo from './ProfileInfo/ProfileInfo.jsx';
 const Profile = (props) => {
   return (
     <div>
-      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+      <ProfileInfo savePhoto={props.savePhoto}
+        IsOwner={props.IsOwner}
+        profile={props.profile}
+        status={props.status}
+        SaveProfile={props.SaveProfile}
+        updateStatus={props.updateStatus} />
       <MyPostsContainer />
     </div>)
 }

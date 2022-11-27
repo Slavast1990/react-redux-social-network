@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import { Switch, Route, withRouter} from "react-router-dom";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter, Switch, Route, withRouter} from "react-router-dom";
+// import { BrowserRouter as Router } from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
@@ -30,12 +30,10 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Switch>
             <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
             <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
             <Route path='/users' render={ () => <UsersContainer />} />
             <Route path='/Login' render={ () => <Login />} />
-          </Switch>
         </div>
       </div>
   );
@@ -52,11 +50,11 @@ let AppContainer = compose (
   connect(mapStateToProps, {initializeApp})) (App);
 
  const SamuraiJSApp = (props) => {
- return <Router>
+ return <HashRouter>
       <Provider store={store}>
         <AppContainer />
       </Provider>
-    </Router>
+    </HashRouter>
 }
 
 export default SamuraiJSApp;

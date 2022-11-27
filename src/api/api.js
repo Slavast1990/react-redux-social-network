@@ -38,7 +38,20 @@ const instance = axios.create({
         },
         updateStatus(status) {
             return instance.put(`profile/status`, { status: status });
+        },
+        savePhoto(photoFile) {
+            const formData = new FormData();
+            formData.append("image", photoFile);// в formData в свойстве image(смотри документацию бекенда) наш приходящий photoFile
+            return instance.put(`profile/photo`, formData, {//делаем put-запрос->первый параметр URL с бекенда->второй formData
+                headers: {//настраиваем специфические заголовки именно для етого запроса (смотри в network)
+                    'Content-Type': 'multipart/form-data'//мы говорим что наш Content-Type является multipart/form-data (фото) 
+                  }
+            });
+        },
+        SaveProfile (profile) {
+            return instance.put(`profile`, profile);
         }
+
     }
     
     export const authAPI = {

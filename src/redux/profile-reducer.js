@@ -1,9 +1,11 @@
+import { stopSubmit } from "redux-form";
 import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SAVE_PHOTO_SUCCES = 'SAVE_PHOTO_SUCCES';
 
 
 let initialState = {
@@ -44,6 +46,10 @@ const profileReducer = (state = initialState, action) => {
         case DELETE_POST: {
             return { ...state, posts: state.posts.filter(p => p.id != action.postId) }//только те id которые не равны action.postId(1)
         }
+        case SAVE_PHOTO_SUCCES: {
+            return { ...state, profile: { ...state.profile, photos: action.photos } }
+        }//только те id которые не равны action.postId(1)
+
         default:
             return state;
     }
@@ -54,6 +60,7 @@ export const addPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostT
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status) => ({ type: SET_STATUS, status })
 export const deletePost = (postId) => ({ type: DELETE_POST, postId })
+export const savePhotoSucces = (photos) => ({ type: SAVE_PHOTO_SUCCES, photos })
 
 
 export const getUserProfile = (userId) => async (dispatch) => {
@@ -70,6 +77,24 @@ export const updateStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
+    }
+}
+
+export const savePhoto = (file) => async (dispatch) => {
+    let response = await profileAPI.savePhoto(file);//отправляю фото
+    if (response.data.resultCode === 0) {//если все норм
+        dispatch(savePhotoSucces(response.data.data.photos));//обновляю фото(в консоле network -> preview -> photos) и отправляю в actionCreator savePhotoSucces
+    }
+}
+
+export const SaveProfile = (profile) => async (dispatch, getState) => {//помимо dispatch в санку приходит функция getState которая позволяет взять state целиком
+    const userId = getState().auth.userId;//беру наш userId со state(нам не запрещено брать данные с других редьюсеров для нашего редьюсера)
+    const response = await profileAPI.SaveProfile(profile);//отправляю данные profile
+    if (response.data.resultCode === 0) {//если все норм
+        dispatch(getUserProfile(userId));//если мы обновили наш профиль мы заново запрашиваем getUserProfile
+    } else {
+        dispatch(stopSubmit("edite-profile", { _error: response.data.messages[0] }));//edite-profile ProfileDataForm а _error с messages(см.)
+        return Promise.reject(response.data.messages[0]);//если error то возвращается Promise с ошибкой
     }
 }
 
