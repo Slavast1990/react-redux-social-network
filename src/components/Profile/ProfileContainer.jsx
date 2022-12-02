@@ -8,7 +8,7 @@ import { compose } from "redux";
 class ProfileContainer extends React.Component {
 
     refreshProfile() {
-        let userId = this.props.match.params.userId;
+        let userId = this.props.match.params.userId;//сюда приходит наш id из URL
         if (!userId) {
             userId = this.props.authorizedUserId;
             if (!userId) {
@@ -57,4 +57,4 @@ let mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto, SaveProfile }),//все ети данные из UI конектим к business
     withRouter
-)(ProfileContainer);
+)(ProfileContainer);//withRouter конектить ProfileContainer к URL

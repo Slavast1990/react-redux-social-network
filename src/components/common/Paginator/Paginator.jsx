@@ -28,7 +28,7 @@ let Paginator = ({totalItemsCount, PageSize, currentPage, onPageChanged, portion
             .map((p) => { 
                 return <span className={ cn({
                     [styles.selectedPage]: currentPage === p 
-                }, styles.pageNumber)}
+                }, styles.pageNumber)}//c помощью cn (classnames) добавляем через запятую несколько классов;styles.selectedPage берем в квадратные скобки потому что свойство не может быть строка
                 key={p}
                     onClick={(event) => { 
                         onPageChanged(p); 
